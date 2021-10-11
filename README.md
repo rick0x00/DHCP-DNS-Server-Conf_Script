@@ -2,5 +2,5 @@
 command execution
 
 ```shell
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/silvajhb/DHCP-DNS-Server-Conf_Script/master/script.sh)"
+sh -c "$(wget -O- https://raw.githubusercontent.com/silvajhb/DHCP-DNS-Server-Conf_Script/master/script.sh)"
 ```

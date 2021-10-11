@@ -2,6 +2,8 @@
 localdir=$(pwd);
 currentUSER="$USERNAME";
 su 
+su
+exit
 equal="==================================================";
 
 echo "$equal";
