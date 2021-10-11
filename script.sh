@@ -5,10 +5,13 @@ equal="==================================================";
 
 echo "$equal";
 echo "start download programs";
-sudo apt update;
+apt update;
+apt install sudo -y;
+sudo apt install iptables -y;
 sudo apt install isc-dhcp-server -y;
 sudo apt install bind9 -y;
 sudo apt install rcconf -y;
+sudo apt install sysv-rc-conf -y;
 echo "end download programs";
 echo "$equal";
 echo "$equal";
@@ -168,10 +171,11 @@ echo "#!/bin/bash
 sudo echo 1 > /proc/sys/net/ipv4/ip_forward;
 sudo modprobe iptable_nat;
 sudo iptables -t nat -A POSTROUTING -o $IWAN1 -j MASQUERADE;
-" >> /etc/init.d/ActiveNATandRouting;
+" > /etc/init.d/ActiveNATandRouting;
 chmod +x /etc/init.d/ActiveNATandRouting;
 cat /etc/init.d/ActiveNATandRouting;
 rcconf;
+sudo sysv-rc-conf;
 echo $equal;
 echo $equal;
 
