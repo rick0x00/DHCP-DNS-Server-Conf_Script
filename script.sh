@@ -179,10 +179,10 @@ echo $equal;
 
 echo "start config DNS Server;"
 
-echo "nameserver $ILAN1address
+sudo echo "nameserver $ILAN1address
+nameserver 80.80.80.80
 nameserver 8.8.8.8
-nameserver 8.8.4.4" > teste5.txt
-/etc/resolv.conf
+nameserver 8.8.4.4" > /etc/resolv.conf
 cat /etc/resolv.conf;
 
 echo "start restart services";
