@@ -161,7 +161,8 @@ sudo modprobe iptable_nat;
 sudo iptables -t nat -A POSTROUTING -o $IWAN1 -j MASQUERADE;
 
 echo "create script to startup config NAT and routing.";
-
+sudo mkdir /var/local/log/;
+ 
 echo "#!/bin/bash
 # Active Routing Packages
 echo 1 > /proc/sys/net/ipv4/ip_forward;
@@ -174,6 +175,7 @@ date >> /var/local/log/ActiveNATandRouting.log;" >> /etc/init.d/ActiveNATandRout
 echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;
 chmod +x /etc/init.d/ActiveNATandRouting;
 cat /etc/init.d/ActiveNATandRouting;
+rcconf;
 echo $equal;
 echo $equal;
 
