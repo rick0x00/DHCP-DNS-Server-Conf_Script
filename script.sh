@@ -148,7 +148,7 @@ echo "finished file edition;"
 echo "start restart services";
 sudo systemctl restart isc-dhcp-server;
 sudo systemctl start isc-dhcp-server;
-sudo systemctl status isc-dhcp-server;
+sudo systemctl status isc-dhcp-server | more;
 
 echo "monitoring clients DHCP";
 cat /var/lib/dhcp/dhcpd.leases;
@@ -165,12 +165,12 @@ echo "create script to startup config NAT and routing.";
 echo "#!/bin/bash
 # Active Routing Packages
 echo 1 > /proc/sys/net/ipv4/ip_forward;
-echo 'Active Routing packages' > /var/local/log/ActiveNATandRouting.log;" > /etc/init.d/ActiveNATandRouting;;
-echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;;
+echo 'Active Routing packages' > /var/local/log/ActiveNATandRouting.log;" > /etc/init.d/ActiveNATandRouting;
+echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;
 echo "# NAT
 iptables -t nat -A POSTROUTING -o $IWAN1 -j MASQUERADE;
 echo 'active masquere ips local network' >> /var/local/log/ActiveNATandRouting.log
-date >> /var/local/log/ActiveNATandRouting.log;" >> /etc/init.d/ActiveNATandRouting;;
+date >> /var/local/log/ActiveNATandRouting.log;" >> /etc/init.d/ActiveNATandRouting;
 echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;
 chmod +x /etc/init.d/ActiveNATandRouting;
 cat /etc/init.d/ActiveNATandRouting;
@@ -188,6 +188,6 @@ cat /etc/resolv.conf;
 echo "start restart services";
 sudo systemctl restart bind9;
 sudo systemctl start bind9;
-sudo systemctl status bind9;
+sudo systemctl status bind9 | more;
 echo "end config DNS Server;"
 echo $equal;
