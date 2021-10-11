@@ -165,14 +165,10 @@ sudo mkdir /var/local/log/;
  
 echo "#!/bin/bash
 # Active Routing Packages
-echo 1 > /proc/sys/net/ipv4/ip_forward;
-echo 'Active Routing packages' > /var/local/log/ActiveNATandRouting.log;" > /etc/init.d/ActiveNATandRouting;
-echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;
-echo "# NAT
-iptables -t nat -A POSTROUTING -o $IWAN1 -j MASQUERADE;
-echo 'active masquere ips local network' >> /var/local/log/ActiveNATandRouting.log
-date >> /var/local/log/ActiveNATandRouting.log;" >> /etc/init.d/ActiveNATandRouting;
-echo 'echo "$?" >> /var/local/log/ActiveNATandRouting.log;' >> /etc/init.d/ActiveNATandRouting;
+sudo echo 1 > /proc/sys/net/ipv4/ip_forward;
+sudo modprobe iptable_nat;
+sudo iptables -t nat -A POSTROUTING -o $IWAN1 -j MASQUERADE;
+" >> /etc/init.d/ActiveNATandRouting;
 chmod +x /etc/init.d/ActiveNATandRouting;
 cat /etc/init.d/ActiveNATandRouting;
 rcconf;
